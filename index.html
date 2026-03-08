@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10~13세 천재 IQ 테스트 🧠</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0A;
+  --card: #111111;
+  --card2: #1A1A1A;
+  --border: #2A2A2A;
+  --pink: #E5007D;
+  --pink2: #FF2D9B;
+  --pink-glow: rgba(229,0,125,0.35);
+  --green-sq: #00C97A;
+  --red-sq: #FF3B3B;
+  --accent: #E5007D;
+  --accent2: #FF2D9B;
+  --gold: #F5C518;
+  --cyan: #00C97A;
+  --green: #00C97A;
+  --red: #FF3B3B;
+  --text: #F0F0F0;
+  --sub: #888888;
+  --white: #FFFFFF;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:16px; }
+body {
+  font-family:'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  min-height:100vh;
+  overflow-x:hidden;
+  color: var(--text);
+}
+
+/* ── 오징어게임 배경: 육각형 타일 패턴 ── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0;
+  background-image:
+    linear-gradient(rgba(229,0,125,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229,0,125,0.07) 1px, transparent 1px),
+    radial-gradient(circle at 25% 25%, rgba(229,0,125,0.05) 0%, transparent 60%),
+    radial-gradient(circle at 75% 75%, rgba(0,201,122,0.05) 0%, transparent 60%);
+  background-size: 44px 44px, 44px 44px, 100% 100%, 100% 100%;
+  pointer-events:none;
+}
+
+/* ── 오징어게임 도형 배경 SVG 장식 ── */
+.sq-shapes {
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.sq-shape {
+  position:absolute; opacity:0.07;
+  animation: shapeDrift ease-in-out infinite alternate;
+}
+@keyframes shapeDrift {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-20px) rotate(8deg); }
+}
+
+/* ── 핑크 글로우 오브 ── */
+.orb {
+  position:fixed; border-radius:50%;
+  filter:blur(100px); opacity:0.22;
+  pointer-events:none; z-index:0;
+  animation: orbFloat ease-in-out infinite alternate;
+}
+.orb1 { width:500px; height:500px; background:#E5007D; top:-160px; left:-160px; animation-duration:9s; }
+.orb2 { width:350px; height:350px; background:#FF2D9B; bottom:-100px; right:-100px; animation-duration:12s; }
+.orb3 { width:250px; height:250px; background:#00C97A; top:35%; right:5%; animation-duration:8s; opacity:0.1; }
+@keyframes orbFloat { from{transform:translate(0,0)} to{transform:translate(28px,18px)} }
+
+/* ── 게임 타이틀 배너 ── */
+.game-title-bar {
+  position:fixed; top:0; left:0; right:0; z-index:10;
+  background:linear-gradient(90deg,#0A0A0A,#1a0010,#0A0A0A);
+  border-bottom:2px solid var(--pink);
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  box-shadow: 0 2px 30px rgba(229,0,125,0.3);
+}
+.game-title-shapes { display:flex; align-items:center; gap:8px; }
+.game-title-shapes .sh { font-size:1rem; }
+.game-title-text {
+  font-family:'Black Han Sans',sans-serif;
+  font-size:1rem; color:var(--white); letter-spacing:3px;
+}
+.game-title-text .ko { color:var(--pink); }
+.pulse-dot {
+  width:8px; height:8px; border-radius:50%; background:var(--pink);
+  animation: pulseDot 1.5s ease infinite;
+  box-shadow: 0 0 8px var(--pink);
+}
+@keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }
+
+#app {
+  position:relative; z-index:1;
+  max-width:660px; margin:0 auto; padding:80px 20px 20px;
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+}
+
+/* ── Card — 오징어게임 스타일 ── */
+.card {
+  background: var(--card);
+  border-radius:4px;
+  padding:32px 28px;
+  width:100%;
+  border:1px solid #2A2A2A;
+  border-top:3px solid var(--pink);
+  box-shadow: 0 0 0 1px #1A1A1A, 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(229,0,125,0.08);
+  animation: slideUp 0.45s cubic-bezier(.34,1.56,.64,1) both;
+  position:relative;
+}
+.card::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--pink), transparent);
+  opacity:0.4;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(28px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+/* ── Progress ── */
+.prog-wrap { margin-bottom:24px; }
+.prog-top  { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.prog-num  { font-size:0.75rem; color:var(--sub); font-family:'Black Han Sans',sans-serif; letter-spacing:1px; }
+.prog-pct  { font-size:0.75rem; color:var(--pink); }
+.prog-bar  { height:4px; background:#222; border-radius:0; overflow:hidden; }
+.prog-fill { height:100%; background:linear-gradient(90deg,var(--pink),var(--pink2),var(--green-sq)); border-radius:0; transition:width 0.6s cubic-bezier(.34,1.56,.64,1); box-shadow:0 0 12px var(--pink-glow); }
+
+/* ── Category chip ── */
+.chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:3px 12px; border-radius:2px; font-size:0.72rem;
+  margin-bottom:16px; border:1px solid; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+}
+.chip-언어 { background:rgba(229,0,125,0.1);  border-color:rgba(229,0,125,0.5);  color:#FF79B8; }
+.chip-수열 { background:rgba(229,0,125,0.1);  border-color:rgba(229,0,125,0.5);  color:#FF79B8; }
+.chip-논리 { background:rgba(0,201,122,0.1);  border-color:rgba(0,201,122,0.5);  color:#4DFFA6; }
+.chip-수학 { background:rgba(0,201,122,0.1);  border-color:rgba(0,201,122,0.5);  color:#4DFFA6; }
+.chip-공간 { background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.2); color:#DDD; }
+.chip-천재 { background:rgba(229,0,125,0.15); border-color:var(--pink); color:var(--pink2);
+  animation: chipPulse 1.2s ease infinite alternate; }
+@keyframes chipPulse { from{box-shadow:0 0 0 rgba(229,0,125,0)} to{box-shadow:0 0 16px rgba(229,0,125,0.6)} }
+
+/* ── Question ── */
+.diff-row { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.diff-stars { font-size:0.8rem; color:var(--gold); letter-spacing:1px; }
+.diff-label { font-size:0.7rem; color:var(--sub); }
+.q-title { font-family:'Black Han Sans',sans-serif; font-size:1.22rem; color:var(--white); line-height:1.6; margin-bottom:6px; white-space:pre-line; }
+.q-hint  { font-size:0.75rem; color:var(--sub); margin-bottom:18px; line-height:1.5; }
+.q-hint span { color:var(--cyan); }
+
+/* ── Vis box ── */
+.vis-box {
+  background:var(--card2); border:1px solid var(--border);
+  border-radius:16px; padding:18px 14px; text-align:center;
+  margin-bottom:18px; font-family:'Black Han Sans',sans-serif;
+}
+.vis-box .seq { font-size:1.5rem; letter-spacing:10px; color:var(--white); line-height:1.8; }
+.vis-box .seq .unk { color:var(--accent); background:rgba(124,58,237,0.2); padding:2px 8px; border-radius:8px; border:1px solid rgba(124,58,237,0.5); }
+.matrix-grid { display:grid; gap:6px; justify-content:center; margin:0 auto; }
+.m-cell {
+  width:62px; height:44px; background:var(--bg); border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; border:1px solid var(--border); color:var(--white);
+  font-family:'Black Han Sans',sans-serif;
+}
+.m-cell.blank { border:1px dashed var(--accent); color:var(--accent); background:rgba(124,58,237,0.08); }
+.m-cell.head  { background:rgba(124,58,237,0.18); border-color:rgba(124,58,237,0.4); color:#C4B5FD; font-size:0.8rem; }
+
+/* ── Options ── */
+.options { display:grid; gap:8px; }
+.options.two { grid-template-columns:1fr 1fr; }
+
+.opt-btn {
+  background:#161616; border:1px solid #2E2E2E;
+  border-radius:3px; padding:13px 16px;
+  font-family:'Noto Sans KR',sans-serif; font-size:0.95rem; color:var(--text);
+  cursor:pointer; transition:all 0.18s ease;
+  display:flex; align-items:center; gap:10px;
+  text-align:left; line-height:1.4;
+  border-left:3px solid transparent;
+}
+.opt-btn:hover:not(:disabled) {
+  border-left-color:var(--pink); background:#1E0E18;
+  color:var(--white);
+  box-shadow:0 0 20px rgba(229,0,125,0.15);
+}
+.opt-btn:active:not(:disabled){ transform:translateX(2px); }
+.opt-btn.correct { background:#0A1F14; border-color:#00C97A; border-left-color:#00C97A; color:#4DFFA6; }
+.opt-btn.wrong   { background:#1F0A0A; border-color:#FF3B3B; border-left-color:#FF3B3B; color:#FF9999; }
+.opt-btn:disabled { cursor:default; }
+.opt-idx {
+  width:28px; height:28px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem; font-weight:700;
+  background:#222; color:var(--sub);
+  border:1px solid #333;
+}
+.opt-btn:hover:not(:disabled) .opt-idx { background:var(--pink); color:white; border-color:var(--pink); }
+.opt-btn.correct .opt-idx { background:var(--green-sq); color:#000; border-color:var(--green-sq); }
+.opt-btn.wrong   .opt-idx { background:var(--red-sq);   color:white; border-color:var(--red-sq); }
+
+/* ── Feedback ── */
+.feedback {
+  margin-top:14px; padding:14px 16px; border-radius:3px;
+  font-size:0.88rem; line-height:1.65; display:none; white-space:pre-line;
+  border-left:3px solid;
+}
+.feedback.show { display:block; animation:slideUp 0.28s ease; }
+.feedback.ok  { background:#06130D; border-color:#00C97A; color:#A7F3D0; }
+.feedback.bad { background:#160808; border-color:#FF3B3B; color:#FFAAAA; }
+
+/* ── Next btn ── */
+.next-btn {
+  margin-top:16px; width:100%; padding:14px;
+  background:var(--pink);
+  border:none; border-radius:3px; color:white;
+  font-family:'Black Han Sans',sans-serif; font-size:1.05rem;
+  cursor:pointer; box-shadow:0 4px 24px rgba(229,0,125,0.4);
+  transition:all 0.2s ease; display:none; letter-spacing:2px;
+}
+.next-btn.show { display:block; animation:slideUp 0.3s 0.1s ease both; }
+.next-btn:hover { transform:translateY(-2px); background:var(--pink2); box-shadow:0 8px 32px rgba(229,0,125,0.55); }
+
+/* ── Genius alert ── */
+.genius-alert {
+  background:rgba(229,0,125,0.07);
+  border:1px solid rgba(229,0,125,0.35); border-radius:3px;
+  padding:14px 16px; margin-bottom:16px; font-size:0.85rem;
+  color:#FF79B8; line-height:1.6;
+  border-left:3px solid var(--pink);
+}
+.genius-alert strong { color:var(--pink2); }
+
+/* ── Intro ── */
+.intro { text-align:center; }
+.logo-row { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:16px; }
+.logo-shapes { display:flex; gap:8px; align-items:center; }
+.logo-shapes svg { filter:drop-shadow(0 0 8px var(--pink)); }
+.logo-text { font-family:'Black Han Sans',sans-serif; font-size:1.6rem; color:var(--white); text-align:left; line-height:1.4; letter-spacing:1px; }
+.logo-text .game-name { display:block; font-size:0.95rem; color:var(--pink); letter-spacing:3px; margin-bottom:2px; }
+.logo-sub { font-size:0.82rem; color:var(--sub); margin-bottom:24px; line-height:1.7; }
+
+.section-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px; text-align:left; }
+.sec-card { background:#161616; border:1px solid #2A2A2A; border-radius:3px; padding:12px 14px; border-top:2px solid #333; }
+.sec-card.genius-card { background:rgba(229,0,125,0.05); border-color:#3A1020; border-top-color:var(--pink); grid-column:span 2; }
+.sec-icon { font-size:1.2rem; margin-bottom:4px; }
+.sec-name { font-size:0.82rem; color:var(--white); font-weight:700; }
+.sec-desc { font-size:0.7rem; color:var(--sub); margin-top:2px; line-height:1.4; }
+.sec-card.genius-card .sec-desc { color:#FF79B8; }
+
+.diff-guide {
+  background:#161616; border:1px solid #2A2A2A;
+  border-radius:3px; padding:10px 16px; margin-bottom:20px;
+  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+  font-size:0.75rem; color:var(--sub);
+}
+.diff-guide span { display:flex; align-items:center; gap:4px; }
+.diff-guide .stars { color:var(--gold); }
+
+.start-btn {
+  width:100%; padding:16px;
+  background:var(--pink);
+  border:none; border-radius:3px; color:white;
+  font-family:'Black Han Sans',sans-serif; font-size:1.2rem;
+  cursor:pointer; box-shadow:0 6px 28px rgba(229,0,125,0.45);
+  transition:all 0.2s ease; letter-spacing:3px;
+  position:relative; overflow:hidden;
+}
+.start-btn::after {
+  content:'▶'; position:absolute; right:20px; top:50%;
+  transform:translateY(-50%); font-size:0.9rem; opacity:0.7;
+}
+.start-btn:hover { transform:translateY(-3px); background:var(--pink2); box-shadow:0 10px 36px rgba(229,0,125,0.6); }
+
+/* ── Result ── */
+.result-wrap { text-align:center; padding:8px 0 20px; }
+.iq-display { position:relative; width:170px; height:170px; margin:0 auto 20px; }
+.iq-svg { transform:rotate(-90deg); }
+.iq-bg-ring { fill:none; stroke:#222; stroke-width:10; }
+.iq-fg-ring { fill:none; stroke-width:10; stroke-linecap:butt; transition:stroke-dashoffset 1.5s 0.3s cubic-bezier(.34,1.2,.64,1); }
+.iq-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.iq-num  { font-family:'Black Han Sans',sans-serif; font-size:2.8rem; color:var(--white); line-height:1; }
+.iq-lbl  { font-size:0.7rem; color:var(--sub); margin-top:2px; }
+.result-badge { display:inline-block; padding:5px 18px; border-radius:2px; font-family:'Black Han Sans',sans-serif; font-size:0.85rem; letter-spacing:2px; margin-bottom:10px; }
+.result-title { font-family:'Black Han Sans',sans-serif; font-size:1.6rem; color:var(--white); margin-bottom:8px; letter-spacing:1px; }
+.result-desc  { font-size:0.88rem; color:var(--sub); line-height:1.7; margin-bottom:16px; white-space:pre-line; }
+
+.genius-bonus-box { background:rgba(229,0,125,0.07); border:1px solid rgba(229,0,125,0.3); border-left:3px solid var(--pink); border-radius:3px; padding:12px 16px; margin-bottom:14px; font-size:0.85rem; color:#FF79B8; line-height:1.6; }
+
+.sub-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.sub-item { background:#161616; border:1px solid #2A2A2A; border-radius:3px; padding:12px 14px; }
+.sub-item.genius { background:rgba(229,0,125,0.05); border-color:#3A1020; }
+.sub-name { font-size:0.7rem; color:var(--sub); margin-bottom:4px; }
+.sub-val  { font-family:'Black Han Sans',sans-serif; font-size:1.3rem; color:var(--white); }
+.sub-bar  { height:3px; background:#222; border-radius:0; margin-top:6px; overflow:hidden; }
+.sub-fill { height:100%; border-radius:0; transition:width 1.2s 0.6s ease; }
+
+/* ── Share buttons ── */
+.share-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+.share-btn {
+  padding:13px 10px; border:1px solid; border-radius:3px;
+  font-family:'Black Han Sans',sans-serif; font-size:0.9rem;
+  cursor:pointer; transition:all 0.2s ease;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  letter-spacing:1px; background:transparent;
+}
+.share-btn.copy { border-color:var(--pink); color:var(--pink); }
+.share-btn.copy:hover { background:var(--pink); color:white; box-shadow:0 4px 20px rgba(229,0,125,0.4); }
+.share-btn.rec  { border-color:var(--green-sq); color:var(--green-sq); }
+.share-btn.rec:hover  { background:var(--green-sq); color:#000; box-shadow:0 4px 20px rgba(0,201,122,0.4); }
+
+.again-btn { width:100%; padding:13px; background:transparent; border:1px solid #333; border-radius:3px; color:var(--sub); font-family:'Black Han Sans',sans-serif; font-size:0.95rem; cursor:pointer; letter-spacing:1px; transition:all 0.2s ease; }
+.again-btn:hover { border-color:var(--pink); color:var(--text); }
+
+/* ── Toast ── */
+.toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(16px); background:#1A1A1A; color:var(--text); padding:10px 22px; border-radius:2px; font-size:0.85rem; opacity:0; transition:all 0.3s ease; pointer-events:none; white-space:nowrap; z-index:9999; border:1px solid #333; border-top:2px solid var(--pink); box-shadow:0 4px 20px rgba(0,0,0,0.6); }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ── Particles ── */
+#particles { position:fixed; inset:0; pointer-events:none; z-index:999; }
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- 오징어게임 도형 배경 장식 -->
+<div class="sq-shapes">
+  <svg class="sq-shape" style="top:8%;left:3%;width:90px;animation-duration:5s;animation-delay:0s" viewBox="0 0 90 90">
+    <circle cx="45" cy="45" r="38" fill="none" stroke="#E5007D" stroke-width="8" opacity="0.6"/>
+  </svg>
+  <svg class="sq-shape" style="top:18%;right:5%;width:70px;animation-duration:7s;animation-delay:1s" viewBox="0 0 70 70">
+    <polygon points="35,5 68,62 2,62" fill="none" stroke="#E5007D" stroke-width="7" opacity="0.5"/>
+  </svg>
+  <svg class="sq-shape" style="bottom:15%;left:4%;width:80px;animation-duration:6s;animation-delay:2s" viewBox="0 0 80 80">
+    <rect x="8" y="8" width="64" height="64" fill="none" stroke="#E5007D" stroke-width="7" opacity="0.5"/>
+  </svg>
+  <svg class="sq-shape" style="bottom:25%;right:3%;width:55px;animation-duration:8s;animation-delay:0.5s" viewBox="0 0 55 55">
+    <circle cx="27" cy="27" r="22" fill="none" stroke="#00C97A" stroke-width="6" opacity="0.4"/>
+  </svg>
+  <svg class="sq-shape" style="top:50%;left:1%;width:50px;animation-duration:9s;animation-delay:3s" viewBox="0 0 50 50">
+    <polygon points="25,3 48,44 2,44" fill="none" stroke="#FFFFFF" stroke-width="5" opacity="0.2"/>
+  </svg>
+  <svg class="sq-shape" style="top:70%;right:2%;width:60px;animation-duration:6.5s;animation-delay:1.5s" viewBox="0 0 60 60">
+    <rect x="6" y="6" width="48" height="48" fill="none" stroke="#00C97A" stroke-width="6" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- 상단 게임 타이틀 바 -->
+<div class="game-title-bar">
+  <div class="game-title-shapes">
+    <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#E5007D" stroke-width="2.5"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16"><polygon points="8,1 15,14 1,14" fill="none" stroke="#FFFFFF" stroke-width="2"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" fill="none" stroke="#E5007D" stroke-width="2.5"/></svg>
+  </div>
+  <div class="game-title-text"><span class="ko">비끄캐또게이므</span></div>
+  <div class="pulse-dot"></div>
+  <div class="game-title-shapes">
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" fill="none" stroke="#E5007D" stroke-width="2.5"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16"><polygon points="8,1 15,14 1,14" fill="none" stroke="#FFFFFF" stroke-width="2"/></svg>
+    <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="#E5007D" stroke-width="2.5"/></svg>
+  </div>
+</div>
+
+<div id="particles"></div>
+<div class="toast" id="toast"></div>
+<div id="app"><div class="card" id="card"></div></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  QUESTIONS  (10~13세)
+// ═══════════════════════════════════════════════════════
+const Q = [
+
+  // ── 언어/어휘 ─────────────────────────────────────
+  {
+    cat:'언어', chipClass:'chip-언어', type:'verbal', diff:2,
+    q:'다음 중 나머지 셋과 성격이 다른 하나는?',
+    hint:'세 개는 같은 범주에 속해요. 하나만 달라요.',
+    vis:null,
+    opts:['장미','튤립','소나무','백합'], ans:2,
+    ok:'✅ 정확해요! 장미·튤립·백합은 꽃이지만 소나무는 나무예요.\n같은 듯 달라 보이는 것 중에서 범주를 찾는 게 핵심이에요!'
+  },
+  {
+    cat:'언어', chipClass:'chip-언어', type:'verbal', diff:3,
+    q:'"빠르다"의 반대말은 "느리다"예요.\n그렇다면 "절약"의 반대말에 가장 가까운 것은?',
+    hint:'절약은 아끼는 것이에요. 반대는?',
+    vis:null,
+    opts:['저축','낭비','소비','분배'], ans:1,
+    ok:'✅ 정답! 절약(아끼기) ↔ 낭비(마구 씀)\n소비는 그냥 쓰는 것, 낭비는 불필요하게 쓰는 것이라 반의어에 더 가까워요.'
+  },
+  {
+    cat:'언어', chipClass:'chip-언어', type:'verbal', diff:3,
+    q:'"책:도서관 = 그림:❓"\n빈칸에 알맞은 것은?',
+    hint:'책이 보관되는 곳이 도서관이에요. 그림이 보관·전시되는 곳은?',
+    vis:null,
+    opts:['학교','미술관','극장','서점'], ans:1,
+    ok:'✅ 맞아요! 책→도서관, 그림→미술관\n이런 유추 문제는 관계의 종류를 파악하는 게 핵심이에요!'
+  },
+
+  // ── 수열 ─────────────────────────────────────────
+  {
+    cat:'수열', chipClass:'chip-수열', type:'pattern', diff:3,
+    q:'다음 수열의 빈칸을 채우세요.',
+    hint:'앞의 두 수를 더하면 다음 수가 나와요.',
+    vis:{ type:'seq', items:['1','1','2','3','5','8','?'] },
+    opts:['11','12','13','15'], ans:2,
+    ok:'✅ 피보나치 수열! 5+8=13\n자연에서도 발견되는 수열로, 해바라기 씨앗 배열, 앵무조개 나선에도 나타나요.'
+  },
+  {
+    cat:'수열', chipClass:'chip-수열', type:'pattern', diff:3,
+    q:'삼각수 패턴에서 빈칸은?\n( 점을 삼각형 모양으로 배열한 수예요 )',
+    hint:'차이를 구해봐요: +2, +3, +4... 늘어나는 수가 규칙적이에요.',
+    vis:{ type:'seq', items:['1','3','6','10','?'] },
+    opts:['13','14','15','16'], ans:2,
+    ok:'✅ 삼각수! 1→(+2)→3→(+3)→6→(+4)→10→(+5)→15\n공식: n(n+1)/2 예요. n=5 → 15!'
+  },
+  {
+    cat:'수열', chipClass:'chip-수열', type:'pattern', diff:4,
+    q:'수열의 규칙을 찾아 빈칸을 채우세요.',
+    hint:'각 항의 차이(+4, +6, +8...)를 먼저 구해봐요. 차이가 어떻게 변하나요?',
+    vis:{ type:'seq', items:['2','6','12','20','30','?'] },
+    opts:['38','40','42','44'], ans:2,
+    ok:'✅ 차이가 +4, +6, +8, +10, +12로 2씩 증가해요!\n30+12=42. 이런 수열을 "2차 등차수열"이라고 해요.'
+  },
+  {
+    cat:'수열', chipClass:'chip-수열', type:'pattern', diff:4,
+    q:'규칙을 찾아 ❓를 구하세요.',
+    hint:'각 항이 몇 배씩 변하는지 확인해봐요.',
+    vis:{ type:'seq', items:['3','6','12','24','?'] },
+    opts:['36','42','48','56'], ans:2,
+    ok:'✅ 등비수열! ×2씩 늘어나요.\n3→6→12→24→48. 공비가 2인 등비수열이에요.'
+  },
+
+  // ── 수학/논리 ─────────────────────────────────────
+  {
+    cat:'수학', chipClass:'chip-수학', type:'math', diff:3,
+    q:'알파벳 암호: A=1, B=2, C=3 ... Z=26\n"DOG"의 숫자 합은?',
+    hint:'D, O, G 각각 몇 번째 알파벳인지 세어보세요. D=4',
+    vis:null,
+    opts:['24','26','28','30'], ans:1,
+    ok:'✅ D=4, O=15, G=7\n4+15+7=26! 알파벳 암호 해독 완료 🔐'
+  },
+  {
+    cat:'수학', chipClass:'chip-수학', type:'math', diff:3,
+    q:'표의 규칙을 찾아 ❓를 구하세요.',
+    hint:'각 행에서 첫 번째 수와 두 번째, 세 번째 수의 관계를 찾아봐요.',
+    vis:{ type:'matrix', cols:3,
+      head:['×?','×?',''],
+      cells:['2','4','8','3','6','12','5','10','?']
+    },
+    opts:['15','18','20','25'], ans:2,
+    ok:'✅ 각 행에서 ×2, ×4 규칙이에요!\n5×2=10, 5×4=20 ✨'
+  },
+  {
+    cat:'수학', chipClass:'chip-수학', type:'math', diff:4,
+    q:'어떤 수를 2로 나눠도 나머지 1,\n3으로 나눠도 나머지 1,\n4로 나눠도 나머지 1일 때,\n가장 작은 그 수는?',
+    hint:'2, 3, 4의 최소공배수를 먼저 구해봐요. 그 다음은?',
+    vis:null,
+    opts:['7','11','13','25'], ans:2,
+    ok:'✅ 2·3·4의 최소공배수 = 12\n12 + 1 = 13!\n확인: 13÷2=6나머지1 ✅  13÷3=4나머지1 ✅  13÷4=3나머지1 ✅'
+  },
+  {
+    cat:'수학', chipClass:'chip-수학', type:'math', diff:4,
+    q:'닭 3마리가 3일 동안 달걀을 3개 낳아요.\n닭 6마리는 6일 동안 달걀을 몇 개 낳을까요?',
+    hint:'닭 1마리가 하루에 몇 개 낳는지 먼저 구해봐요.',
+    vis:null,
+    opts:['6개','9개','12개','18개'], ans:2,
+    ok:'✅ 닭 1마리 × 1일 = 1/3개\n닭 6마리 × 6일 = 36 × (1/3) = 12개 🐔\n직관적으로 6이나 18이라고 틀리기 쉬운 함정 문제예요!'
+  },
+
+  // ── 공간/논리 ─────────────────────────────────────
+  {
+    cat:'공간', chipClass:'chip-공간', type:'spatial', diff:3,
+    q:'거울에 비친 시계가 10시 10분을 가리켜요.\n실제 시각은 몇 시 몇 분일까요?',
+    hint:'거울은 좌우가 뒤집혀요. 시계판에서 12를 기준으로 반전해 생각해봐요.',
+    vis:null,
+    opts:['1시 50분','2시 10분','10시 10분','11시 40분'], ans:0,
+    ok:'✅ 거울에서 좌우가 뒤집히면 10:10 → 1:50\n12시를 중심으로 대칭이동 시키면 돼요 🪞\n10+2=12, 10분→50분으로 바뀌어요!'
+  },
+  {
+    cat:'논리', chipClass:'chip-논리', type:'logic', diff:3,
+    q:'모든 A는 B다. 모든 B는 C다.\n다음 중 반드시 참인 것은?',
+    hint:'A→B, B→C라면 A→? 로 이어지는지 생각해봐요.',
+    vis:null,
+    opts:['모든 C는 A다','모든 A는 C다','어떤 B는 A가 아니다','어떤 C는 B가 아니다'], ans:1,
+    ok:'✅ 삼단논법! A→B, B→C이면 A→C\n"모든 A는 C다"가 반드시 참이에요.\n하지만 역은 항상 성립하지 않아요 (모든 C가 A는 아님)'
+  },
+  {
+    cat:'논리', chipClass:'chip-논리', type:'logic', diff:4,
+    q:'민수, 준호, 서연 세 명이 달리기를 했어요.\n• 민수는 준호보다 빠르다\n• 서연은 민수보다 느리다\n• 준호는 꼴찌가 아니다\n1등은 누구일까요?',
+    hint:'각 조건을 순서로 바꿔봐요. >, < 관계로 정리하면 쉬워요.',
+    vis:null,
+    opts:['민수','준호','서연','알 수 없다'], ans:0,
+    ok:'✅ 조건 정리: 민수 > 준호, 민수 > 서연\n준호가 꼴찌가 아니면 → 서연이 꼴찌\n즉, 민수 > 준호 > 서연 → 1등은 민수!'
+  },
+
+  // ══════════════════════════════════════════════════
+  // 🔥 천재 도전 구역
+  // ══════════════════════════════════════════════════
+  {
+    cat:'천재 도전', chipClass:'chip-천재', type:'genius', genius:true, diff:5,
+    q:'1부터 100까지 모든 자연수의 합은?\n( 계산기 없이 풀어봐요 )',
+    hint:'가우스의 방법: 1+100=101, 2+99=101 ... 이런 쌍이 몇 개일까요?',
+    vis:null,
+    opts:['4950','5000','5050','5100'], ans:2,
+    ok:'✅ 가우스 공식! n(n+1)/2 = 100×101/2 = 5050\n어린 가우스가 선생님을 깜짝 놀라게 한 방법이에요 🧮'
+  },
+  {
+    cat:'천재 도전', chipClass:'chip-천재', type:'genius', genius:true, diff:5,
+    q:'시계의 분침이 한 바퀴 도는 동안\n시침은 몇 도 움직일까요?',
+    hint:'시침은 12시간에 360도. 1시간에 30도. 60분에 30도면 1분에?',
+    vis:null,
+    opts:['0.5도','1도','5도','6도'], ans:0,
+    ok:'✅ 시침은 12시간에 360도 → 1분에 360÷720 = 0.5도!\n분침은 1분에 6도 움직여요. 둘 사이 차이는 5.5도/분이에요 🕐'
+  },
+  {
+    cat:'천재 도전', chipClass:'chip-천재', type:'genius', genius:true, diff:5,
+    q:'표의 패턴을 찾아 ❓를 구하세요.\n각 행과 열에 숨겨진 규칙이 있어요.',
+    hint:'각 행의 세 숫자 관계를 먼저 파악해봐요. 곱셈? 합? 차이?',
+    vis:{ type:'matrix', cols:3,
+      cells:['1','2','3','2','4','6','3','6','?']
+    },
+    opts:['7','8','9','10'], ans:2,
+    ok:'✅ 행: ×1, ×2, ×3 / 열: ×1, ×2, ×3\n즉 3행 3열 = 3×3 = 9\n또는 첫 열 × 첫 행 = 해당 셀 값이에요!'
+  },
+  {
+    cat:'천재 도전', chipClass:'chip-천재', type:'genius', genius:true, diff:5,
+    q:'어떤 두 자리 수가 있어요.\n각 자리 숫자의 합은 9이고,\n십의 자리와 일의 자리를 바꾸면\n원래 수보다 27이 커져요.\n원래 수는?',
+    hint:'십의 자리를 a, 일의 자리를 b라 하면\na+b=9, (10b+a)-(10a+b)=27을 풀어봐요.',
+    vis:null,
+    opts:['27','36','45','54'], ans:1,
+    ok:'✅ a+b=9, 9(b-a)=27 → b-a=3\na+b=9, b-a=3 → a=3, b=6 → 원래 수 36!\n바꾸면 63, 63-36=27 ✅'
+  },
+  {
+    cat:'천재 도전', chipClass:'chip-천재', type:'genius', genius:true, diff:5,
+    q:'아래 논리 퍼즐을 풀어봐요.\n• 빨강, 파랑, 초록 모자를 A, B, C가 써요\n• A는 파랑 모자를 안 쓴다\n• B는 초록 모자를 안 쓴다\n• C는 파랑도 초록도 아닌 모자를 쓴다\nA가 쓴 모자 색은?',
+    hint:'C부터 먼저 결정해봐요. C는 파랑도 초록도 아니면?',
+    vis:null,
+    opts:['빨강','파랑','초록','알 수 없음'], ans:2,
+    ok:'✅ C: 파랑×, 초록× → 빨강\nC=빨강이면 A와 B는 파랑/초록\nA는 파랑× → A=초록\nB는 초록× → B=파랑!'
+  },
+];
+
+// ═══════════════════════════════════════════
+const TYPES   = ['verbal','pattern','math','spatial','logic','genius'];
+const T_LABEL = { verbal:'언어', pattern:'수열', math:'수학', spatial:'공간', logic:'논리', genius:'천재 도전' };
+const T_COLOR = { verbal:'#F9A8D4', pattern:'#C4B5FD', math:'#6EE7B7', spatial:'#FDE68A', logic:'#67E8F9', genius:'#FCA5A5' };
+const FIRST_G = Q.findIndex(q=>q.genius);
+const DIFF_MAP = { 2:'★★', 3:'★★★', 4:'★★★★', 5:'★★★★★' };
+
+let cur=0, scores={}, maxS={}, answered=false, startT=0;
+let lastIQ=100, lastAnimal='🧠', lastTitle='';
+
+function chipHTML(q) {
+  return `<div class="chip ${q.chipClass}">${q.cat}</div>`;
+}
+
+function diffHTML(d) {
+  return `<div class="diff-row">
+    <span class="diff-stars">${DIFF_MAP[d]||'★★★'}</span>
+    <span class="diff-label">난이도</span>
+  </div>`;
+}
+
+function renderVis(v) {
+  if(!v) return '';
+  if(v.type==='seq') {
+    const html = v.items.map(it =>
+      it==='?' ? `<span class="unk">?</span>` : it
+    ).join('  ');
+    return `<div class="vis-box"><div class="seq">${html}</div></div>`;
+  }
+  if(v.type==='matrix') {
+    const cells = v.cells.map(c =>
+      `<div class="m-cell ${c==='?'?'blank':''}">${c}</div>`
+    ).join('');
+    return `<div class="vis-box"><div class="matrix-grid" style="grid-template-columns:repeat(${v.cols},62px)">${cells}</div></div>`;
+  }
+  return '';
+}
+
+// ── Intro ──────────────────────────────────
+function showIntro() {
+  document.getElementById('card').innerHTML = `
+    <div class="intro">
+      <div class="logo-row">
+        <div class="logo-shapes">
+          <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" fill="none" stroke="#E5007D" stroke-width="4"/><circle cx="22" cy="22" r="8" fill="#E5007D"/></svg>
+          <svg width="38" height="38" viewBox="0 0 38 38"><polygon points="19,3 36,34 2,34" fill="none" stroke="#E5007D" stroke-width="4"/></svg>
+          <svg width="38" height="38" viewBox="0 0 38 38"><rect x="4" y="4" width="30" height="30" fill="none" stroke="#E5007D" stroke-width="4"/><rect x="10" y="10" width="18" height="18" fill="#E5007D"/></svg>
+        </div>
+        <div class="logo-text">
+          <span class="game-name">비끄캐또게이므</span>
+          10~13세 천재 IQ 테스트
+        </div>
+      </div>
+      <p class="logo-sub">웩슬러 기반 · 피보나치 · 가우스 · 논리 퍼즐 · 수학적 사고력<br>총 ${Q.length}문제 · 천재 도전 구역 포함</p>
+
+      <div class="section-grid">
+        <div class="sec-card">
+          <div class="sec-icon">📖</div>
+          <div class="sec-name">언어 추론</div>
+          <div class="sec-desc">어휘력·유추·범주화</div>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">🔢</div>
+          <div class="sec-name">수열 패턴</div>
+          <div class="sec-desc">피보나치·삼각수·등비</div>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">🧮</div>
+          <div class="sec-name">수학적 사고</div>
+          <div class="sec-desc">암호·최소공배수·논리식</div>
+        </div>
+        <div class="sec-card">
+          <div class="sec-icon">🔭</div>
+          <div class="sec-name">공간·논리</div>
+          <div class="sec-desc">거울·삼단논법·순서 추론</div>
+        </div>
+        <div class="sec-card genius-card">
+          <div class="sec-icon">🔥</div>
+          <div class="sec-name">천재 도전 구역 (5문제) — IQ 보너스 최대 +30점</div>
+          <div class="sec-desc">가우스 합산 · 시침 각도 · 연립방정식 · 논리 퍼즐 · 행렬 패턴</div>
+        </div>
+      </div>
+
+      <div class="diff-guide">
+        <span><span class="stars">★★</span> 기본</span>
+        <span><span class="stars">★★★</span> 보통</span>
+        <span><span class="stars">★★★★</span> 어려움</span>
+        <span><span class="stars">★★★★★</span> 천재</span>
+      </div>
+
+      <button class="start-btn" onclick="startTest()">▶  시작하기</button>
+    </div>`;
+}
+
+// ── Start ──────────────────────────────────
+function startTest() {
+  cur=0; scores={}; maxS={};
+  TYPES.forEach(t=>{scores[t]=0; maxS[t]=0;});
+  Q.forEach(q=>{ maxS[q.type]++; });
+  showQ();
+}
+
+// ── Question ───────────────────────────────
+function showQ() {
+  if(cur>=Q.length){ showResult(); return; }
+  answered=false; startT=Date.now();
+  const q=Q[cur];
+  const g=!!q.genius;
+  const pct=(cur/Q.length*100).toFixed(0);
+  const letters=['A','B','C','D'];
+  const twoCol=q.opts.every(o=>o.length<=12);
+  const showAlert=g && cur===FIRST_G;
+
+  const card=document.getElementById('card');
+  card.style.animation='none'; card.offsetHeight;
+  card.style.animation='slideUp 0.4s cubic-bezier(.34,1.56,.64,1) both';
+
+  card.innerHTML=`
+    <div class="prog-wrap">
+      <div class="prog-top">
+        <span class="prog-num">Q${cur+1} / ${Q.length}</span>
+        <span class="prog-pct">${pct}%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>
+
+    ${showAlert ? `<div class="genius-alert">
+      <strong>🔥 천재 도전 구역 시작!</strong><br>
+      지금부터 문제 난이도가 대폭 올라가요. 맞히면 IQ 보너스 +30점(최대)을 받아요.
+    </div>` : ''}
+
+    ${chipHTML(q)}
+    ${diffHTML(q.diff)}
+    <div class="q-title">${q.q}</div>
+    <div class="q-hint">💡 <span>${q.hint}</span></div>
+
+    ${renderVis(q.vis)}
+
+    <div class="options ${twoCol?'two':''}" id="opts">
+      ${q.opts.map((o,i)=>`
+        <button class="opt-btn" onclick="pick(${i})" id="o${i}">
+          <span class="opt-idx">${letters[i]}</span>${o}
+        </button>`).join('')}
+    </div>
+
+    <div class="feedback" id="fb"></div>
+    <button class="next-btn" id="nb" onclick="nextQ()">
+      ${cur+1<Q.length ? '다음 문제  →' : '결과 보기  →'}
+    </button>`;
+}
+
+function pick(idx) {
+  if(answered) return;
+  answered=true;
+  const q=Q[cur];
+  const elapsed=(Date.now()-startT)/1000;
+  const ok=idx===q.ans;
+  if(ok){
+    const speedBonus=elapsed<8?1.1:1;
+    scores[q.type]=(scores[q.type]||0)+speedBonus;
+  }
+  document.querySelectorAll('.opt-btn').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.ans) btn.classList.add('correct');
+    else if(i===idx&&!ok) btn.classList.add('wrong');
+  });
+  const fb=document.getElementById('fb');
+  fb.className='feedback show '+(ok?'ok':'bad');
+  fb.innerHTML=ok ? q.ok : `❌ 틀렸어요. 정답은 <strong>${q.opts[q.ans]}</strong>\n\n${q.ok}`;
+  document.getElementById('nb').classList.add('show');
+}
+
+function nextQ(){ cur++; showQ(); }
+
+// ── Result ─────────────────────────────────
+function showResult() {
+  const sub={};
+  TYPES.forEach(t=>{
+    const r=maxS[t]>0?(scores[t]||0)/maxS[t]:0;
+    sub[t]=Math.round(7+r*12);
+  });
+  const normTypes=['verbal','pattern','math','spatial','logic'];
+  const normAvg=normTypes.reduce((s,t)=>s+sub[t],0)/normTypes.length;
+  const baseIQ=Math.round(100+(normAvg-13)*15/3);
+  const gRatio=maxS['genius']>0?(scores['genius']||0)/maxS['genius']:0;
+  const gBonus=Math.round(gRatio*30);
+  const iq=Math.min(165,Math.max(70,baseIQ+gBonus));
+  const gOk=Math.round(gRatio*maxS['genius']);
+  const gTot=maxS['genius'];
+  lastIQ=iq;
+
+  let badge,badgeStyle,title,desc,ringColor;
+  if(iq>=155)      {badge='LEGENDARY';badgeStyle='background:linear-gradient(135deg,#F59E0B,#EF4444);color:white;';title='전설적 천재';desc='상위 0.1% 수준이에요.\n천재 문제를 거의 완벽히 풀었어요. 타고난 수학·논리적 두뇌예요.';ringColor='url(#gold)';}
+  else if(iq>=140) {badge='GENIUS';badgeStyle='background:linear-gradient(135deg,#7C3AED,#EC4899);color:white;';title='진짜 천재';desc='상위 1% 수준!\n수열·논리·수학 전 영역에서 뛰어난 능력을 보였어요.';ringColor='url(#purple)';}
+  else if(iq>=125) {badge='GIFTED';badgeStyle='background:rgba(124,58,237,0.2);border:1px solid #7C3AED;color:#C4B5FD;';title='영재 수준';desc='평균보다 훨씬 뛰어나요!\n특히 추론과 패턴 인식 능력이 두드러져요.';ringColor='url(#blue)';}
+  else if(iq>=110) {badge='BRIGHT';badgeStyle='background:rgba(16,185,129,0.15);border:1px solid #10B981;color:#6EE7B7;';title='우수한 두뇌';desc='평균 이상의 탄탄한 사고력이에요!\n꾸준히 연습하면 더 올라갈 수 있어요.';ringColor='url(#green)';}
+  else             {badge='KEEP GOING';badgeStyle='background:rgba(148,163,184,0.15);border:1px solid #475569;color:#94A3B8;';title='성장 중';desc='기초를 잘 쌓았어요!\n천재 문제는 어른들도 어려워해요. 계속 도전하세요.';ringColor='url(#gray)';}
+
+  lastTitle=title;
+
+  const R=75, CX=85, CY=85;
+  const circ=2*Math.PI*R;
+  const iqPct=Math.min((iq-70)/95,1);
+  const offset=circ*(1-iqPct);
+
+  const card=document.getElementById('card');
+  card.style.animation='none'; card.offsetHeight;
+  card.style.animation='slideUp 0.5s cubic-bezier(.34,1.56,.64,1) both';
+
+  card.innerHTML=`
+    <div class="result-wrap">
+      <div class="iq-display">
+        <svg class="iq-svg" width="170" height="170" viewBox="0 0 170 170">
+          <defs>
+            <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F59E0B"/>
+              <stop offset="100%" style="stop-color:#EF4444"/>
+            </linearGradient>
+            <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#7C3AED"/>
+              <stop offset="100%" style="stop-color:#EC4899"/>
+            </linearGradient>
+            <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#06B6D4"/>
+              <stop offset="100%" style="stop-color:#7C3AED"/>
+            </linearGradient>
+            <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#10B981"/>
+              <stop offset="100%" style="stop-color:#06B6D4"/>
+            </linearGradient>
+            <linearGradient id="gray" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#475569"/>
+              <stop offset="100%" style="stop-color:#94A3B8"/>
+            </linearGradient>
+          </defs>
+          <circle class="iq-bg-ring" cx="${CX}" cy="${CY}" r="${R}"/>
+          <circle class="iq-fg-ring" id="iqRing" cx="${CX}" cy="${CY}" r="${R}"
+            stroke="${ringColor}"
+            stroke-dasharray="${circ}"
+            stroke-dashoffset="${circ}"/>
+        </svg>
+        <div class="iq-center">
+          <div class="iq-num">${iq}</div>
+          <div class="iq-lbl">IQ 점수</div>
+        </div>
+      </div>
+      <div class="result-badge" style="${badgeStyle}">${badge}</div>
+      <div class="result-title">${title}</div>
+      <div class="result-desc">${desc}</div>
+    </div>
+
+    ${gBonus>0
+      ? `<div class="genius-bonus-box">🔥 천재 도전 ${gTot}문제 중 <strong>${gOk}개</strong> 정답 → IQ +${gBonus}점 보너스!</div>`
+      : gTot>0
+      ? `<div class="genius-bonus-box">🔥 천재 도전 ${gTot}문제 중 <strong>${gOk}개</strong> 정답<br>모두 맞히면 IQ +30점 보너스를 받을 수 있어요!</div>`
+      : ''}
+
+    <div class="sub-grid">
+      ${TYPES.map(t=>`
+        <div class="sub-item ${t==='genius'?'genius':''}">
+          <div class="sub-name">${T_LABEL[t]}</div>
+          <div class="sub-val">${sub[t]}<span style="font-size:0.7rem;color:var(--sub)"> /19</span></div>
+          <div class="sub-bar">
+            <div class="sub-fill" style="width:${sub[t]/19*100}%;background:${T_COLOR[t]}"></div>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <div class="share-row">
+      <button class="share-btn copy" onclick="shareResult()">📤 결과 공유</button>
+      <button class="share-btn rec"  onclick="recommend()">💬 친구 추천</button>
+    </div>
+    <button class="again-btn" onclick="showIntro()">↺  다시 도전하기</button>`;
+
+  // Animate ring
+  setTimeout(()=>{
+    const ring=document.getElementById('iqRing');
+    if(ring) ring.style.strokeDashoffset=offset;
+    document.querySelectorAll('.sub-fill').forEach(el=>{
+      const w=el.style.width; el.style.width='0%';
+      requestAnimationFrame(()=>{ el.style.width=w; });
+    });
+  },200);
+
+  burst(iq>=140);
+}
+
+// ── Share ───────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+function shareResult(){
+  const text=`🧠 10~13세 천재 IQ 테스트 결과\n\n${lastTitle} · IQ ${lastIQ}점\n\n나도 한 번 풀어봤는데 꽤 어려웠어요!\n친구들도 도전해봐요 💪`;
+  if(navigator.share) navigator.share({title:'천재 IQ 테스트',text}).catch(()=>doCopy(text));
+  else doCopy(text);
+}
+
+function recommend(){
+  const text=`🔥 10~13세 천재 IQ 테스트\n\n피보나치·가우스·논리 퍼즐까지!\n진짜 어려운 문제들로 IQ를 측정해봐요 🧠\n도전해보고 점수 알려줘!`;
+  if(navigator.share) navigator.share({title:'천재 IQ 테스트',text}).catch(()=>doCopy(text));
+  else doCopy(text);
+}
+
+function doCopy(text){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text)
+      .then(()=>showToast('📋 클립보드에 복사됐어요!'))
+      .catch(()=>fbCopy(text));
+  } else fbCopy(text);
+}
+
+function fbCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.style.cssText='position:fixed;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); showToast('📋 복사 완료!'); }
+  catch(e){ showToast('😅 직접 캡처해서 공유해봐요!'); }
+  document.body.removeChild(ta);
+}
+
+// ── Confetti ────────────────────────────────
+function burst(big){
+  const c=document.getElementById('particles');
+  const base=['✨','💫','⭐','🌟','🎉','🎊'];
+  const ex=big?['🏆','👑','💎','🔥']:[];
+  const all=[...base,...ex];
+  const n=big?50:25;
+  for(let i=0;i<n;i++){
+    setTimeout(()=>{
+      const s=document.createElement('div');
+      s.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:-40px;font-size:${18+Math.random()*18}px;pointer-events:none;transition:transform ${1.2+Math.random()*1.8}s ease,opacity ${1.4+Math.random()}s ease;`;
+      s.textContent=all[Math.floor(Math.random()*all.length)];
+      c.appendChild(s);
+      requestAnimationFrame(()=>{
+        s.style.transform=`translateY(${window.innerHeight+60}px) rotate(${Math.random()*360}deg)`;
+        s.style.opacity='0';
+      });
+      setTimeout(()=>s.remove(),3200);
+    },i*50);
+  }
+}
+
+// ── Init ────────────────────────────────────
+showIntro();
+</script>
+</body>
+</html>
